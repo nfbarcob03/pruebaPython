@@ -45,7 +45,6 @@ class Main:
 
         print(self.break_while)
         while self.break_while == 1:
-            print('entre')
             self.mostrarMenuPrincipa()
             opcion = input(Mensajes.common['io'])
             action = self.choisesPrincipal.get(opcion)
@@ -120,7 +119,7 @@ class Main:
         return torre.verMovimientos(tablero)
     
 
-    def salir(self, usuario):
+    def salir(self):
         sys.exit(0)
 
 
