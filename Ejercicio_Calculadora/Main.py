@@ -1,24 +1,35 @@
 from Mensajes import Mensajes
+from Operaciones.SumaResta import SumaResta
+from Operaciones.MultiplicacionFactores import MultiplicacionFactores
 
 import sys
 import numpy as np
 import re
 
 
+
 class Main:
 
     def __init__(self):
         self.break_while = 1
-        self.tableroConFicha = None
-        self.tableroNumerado = None
+
 # diccionario de opciones de los menus
         self.choisesPrincipal = {  # menu principal
-            "1": self.suma,
-            "2": self.resta,
-            #"3": self.multiplicacionPolinomios,
-            #"4": self.multiplicacionEscalar,
-            #"5": self.evaluacionPolinomio,
-            #"6": self.salir
+            "1": self.menuSumaResta,
+            "2": self.menuMultiplicacionFactores,
+            "3": self.menuMultiplicacionPolinomios,
+            # "4": self.multiplicacionEscalar,
+            # "5": self.evaluacionPolinomio,
+            # "6": self.salir
+        }
+
+        self.choisesOperacion = {  # menu Suma y resta
+            "1": 'calcular',
+            "2": self.volver,
+            "3": self.salir,
+            # "4": self.multiplicacionEscalar,
+            # "5": self.evaluacionPolinomio,
+            # "6": self.salir
         }
 
     def run(self):
@@ -37,60 +48,69 @@ class Main:
     def mostrarMenuPrincipa(self):
         print(Mensajes.menu1['Menu'], Mensajes.common['es'], Mensajes.menu1['1'], Mensajes.common['es'],
               Mensajes.menu1['2'], Mensajes.common['es'], Mensajes.menu1['3'], Mensajes.common['es'], Mensajes.menu1['4'],
-              Mensajes.common['es'], Mensajes.menu1['5'], Mensajes.common['es'], Mensajes.menu1['6'], Mensajes.common['es'])
+              Mensajes.common['es'], Mensajes.menu1['5'], Mensajes.common['es'])
 
-    def suma(self):
-        breakSuma = 1
-        while(breakSuma == 1):
-            suma = input(Mensajes.suma['ingreseSuma'])
-            patronValido = re.match(r'(((\+?)+(\d*)+(\s*)+(\+)+(\s*))*)+(\d*)', suma)
-            print(patronValido)
-            if(patronValido):
-                listaNumeros = suma.split('+')
-                listaNumeros = list(map(int, listaNumeros))
-                print(self.sumalista(listaNumeros))
+    def menuSumaResta(self):
+        self.break_while = 1
+        objetoSumaResta = SumaResta()
+        suma = input(Mensajes.operaciones['ingreseOperacionSuma'])
+        print(objetoSumaResta.calcular(suma))
+        while(self.break_while == 1):
+            print(Mensajes.common['es'], Mensajes.operaciones['opcion1'], Mensajes.common['es'],
+                  Mensajes.operaciones['opcion2'], Mensajes.common['es'], Mensajes.operaciones['opcion3'])
+            opcion = input()
+            action = self.choisesOperacion.get(opcion)
+            if action:
+                if opcion == '1':
+                    suma = input(Mensajes.operaciones['ingreseOperacionSuma'])
+                    print(objetoSumaResta.calcular(suma))
+                else:
+                    action()
             else:
-                print(Mensajes.error['patronInvalido'])
-            
-            print(Mensajes.common['es'],Mensajes.suma['opcion1'], Mensajes.common['es'],Mensajes.suma['opcion2'], Mensajes.common['es'],Mensajes.suma['opcion3'])
-            decision = input()
-
-            if(decision == '2'):
-                self.run()
-            if(decision == '3'):
-                self.salir()
-
-    def sumalista(self, listaNumeros):
-        if len(listaNumeros) == 1:
-            return listaNumeros[0]
-        else:
-            return listaNumeros[0] + self.sumalista(listaNumeros[1:])
-
-    def resta(self):
-        breakSuma = 1
-        while(breakSuma == 1):
-            resta = input(Mensajes.resta['ingreseResta'])
-            patronValido = re.match(r'(((\-?)+(\d*)+(\s*)+(\-)+(\s*))*)+(\d*)', resta)
-            if(patronValido):
-                listaNumeros = resta.split('+')
-                listaNumeros = list(map(int, listaNumeros))
-                print(self.restalista(listaNumeros))
+                print(Mensajes.menu1['0'])
+    
+    def menuMultiplicacionFactores(self):
+        self.break_while = 1
+        objetoMultiplicacionFactores = MultiplicacionFactores()
+        poli = input(Mensajes.operaciones['ingreseMultiplicacionFactores'])
+        objetoMultiplicacionFactores.calcular(poli)
+        while(self.break_while == 1):
+            print(Mensajes.common['es'], Mensajes.operaciones['opcion1'], Mensajes.common['es'],
+                  Mensajes.operaciones['opcion2'], Mensajes.common['es'], Mensajes.operaciones['opcion3'])
+            opcion = input()
+            action = self.choisesOperacion.get(opcion)
+            if action:
+                if opcion == '1':
+                    poli = input(Mensajes.operaciones['ingreseMultiplicacionFactores'])
+                    print(objetoMultiplicacionFactores.calcular(poli))
+                else:
+                    action()
             else:
-                print(Mensajes.error['patronInvalido'])
-            
-            print(Mensajes.common['es'],Mensajes.resta['opcion1'], Mensajes.common['es'],Mensajes.resta['opcion2'], Mensajes.common['es'],Mensajes.resta['opcion3'])
-            decision = input()
+                print(Mensajes.menu1['0'])
 
-            if(decision == '2'):
-                self.run()
-            if(decision == '3'):
-                self.salir()
+    def menuMultiplicacionPolinomios(self):
+        self.break_while = 1
+        objetoMultiplicacionPolinomios = MultiplicacionFactores()
+        poli = input(Mensajes.operaciones['ingreseMultiplicacionFactores'])
+        objetoMultiplicacionPolinomios.calcular(poli)
+        while(self.break_while == 1):
+            print(Mensajes.common['es'], Mensajes.operaciones['opcion1'], Mensajes.common['es'],
+                  Mensajes.operaciones['opcion2'], Mensajes.common['es'], Mensajes.operaciones['opcion3'])
+            opcion = input()
+            action = self.choisesOperacion.get(opcion)
+            if action:
+                if opcion == '1':
+                    poli = input(Mensajes.operaciones['ingreseMultiplicacionFactores'])
+                    print(objetoMultiplicacionPolinomios.calcular(poli))
+                else:
+                    action()
+            else:
+                print(Mensajes.menu1['0'])
 
-    def restalista(self, listaNumeros):
-        if len(listaNumeros) == 1:
-            return listaNumeros[0]
-        else:
-            return listaNumeros[0] - self.sumalista(listaNumeros[1:])
+    
+
+    def volver(self):
+        self.run()
 
     def salir(self):
         sys.exit(0)
