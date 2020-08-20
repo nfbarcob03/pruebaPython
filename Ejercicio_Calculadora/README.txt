@@ -48,6 +48,8 @@ Consideraciones:
 	-Tener instalado python >3.6 
 	-Al ingresar las operaciones de suma y resta, garantizar finalizar con algun digito y no en un 
         operador como (+ o -). 
+	-Se hace uso de regex para validar lso patrones de las entradas de usuario
+	-Se hace uso de funciones map y conprenhesion para hacer operaciones sobre arreglos y listas
 
 Como proceder:
 	- 1. Pararce en el directorio principal, donde esta el archivo requirements.txt y 
